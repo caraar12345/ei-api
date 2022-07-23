@@ -2,6 +2,8 @@
 
 A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fanaticscraper/Egg**](https://github.com/fanaticscraper/Egg) and using them to create a RESTful API for statistics.
 
+---
+
 ## Use cases
 
 - Egg counts in Grafana using Prometheus + [json_exporter](https://github.com/prometheus-community/json_exporter)
@@ -9,7 +11,9 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 - Contract / Co-Op data in JSON format
 - ???
 
-## Usage
+---
+
+## Usage
 
 - Uses Poetry as the package manager
   - Install Poetry on your machine
