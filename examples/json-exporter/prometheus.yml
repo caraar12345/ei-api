@@ -1,0 +1,16 @@
+scrape_configs:
+  - job_name: 'egg_inc'
+    scrape_interval: 60s
+    metrics_path: /probe
+    params:
+      module: [egg_inc]
+    static_configs:
+      - targets:
+        - 'http://ei_api/stats?egg_inc_id=EIxxxxxxxxxxxxxxxx' ## where ei_api is the location of the gunicorn server
+        labels:
+          egg_inc_id: 'EIxxxxxxxxxxxxxxxx'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param__target
+      - target_label: __address__
+        replacement: json-exporter:7979 ## Location of the json exporter's real <hostname>:<port>

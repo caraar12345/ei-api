@@ -1,0 +1,27 @@
+modules:
+  egg_inc:
+    metrics:
+      - name: egg_inc_drone_takedowns
+        path: '{ .drone_takedowns }'
+        help: Normal drones taken down
+
+      - name: egg_inc_elite_drone_takedowns
+        path: '{ .drone_takedowns_elite }'
+        help: Elite drones taken down
+
+      - name: egg_inc_total_egg
+        type: object
+        path: '{ .total_eggs[*] }'
+        help: Total of each egg type collected
+        values:
+          count: '{ .count }'
+        labels:
+          egg: '{ .egg_type }'
+
+      - name: egg_inc_video_doubler_uses
+        path: '{ .video_doubler_uses }'
+        help: Video doubler uses
+
+      - name: egg_inc_prestiges
+        path: '{ .num_prestiges }'
+        help: Times prestiged
