@@ -10,5 +10,13 @@
 			"path": "/Users/aaroncarson/src/github.com/derekantrican/EggIncAPI"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"protoc": {
+		"options": [
+			"--proto_path=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto",
+			"--python_out=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto/gen"
+		]
+		}
+
+	}
 }
