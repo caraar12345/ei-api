@@ -1,31 +1,34 @@
+import sentry_sdk
+from sentry_sdk.integrations.falcon import FalconIntegration
+
+sentry_sdk.init(
+  dsn="https://d42921cbb87b4c26b1a91dc566d811f2@o915576.ingest.sentry.io/6596181",
+  integrations=[
+     FalconIntegration(),
+  ],
+
+  # Set traces_sample_rate to 1.0 to capture 100%
+  # of transactions for performance monitoring.
+  # We recommend adjusting this value in production,
+  traces_sample_rate=1.0,
+)
+
 import os
-import proto.gen.ei_pb2 as ei_pb2
 import base64
 import requests
 import falcon
+import json
+
+import sys
+sys.path.append('ei-api/')
+
+import proto.gen.ei_pb2 as ei_pb2
 from constants import *
+from ei_utils import load_ei_first_contact_data
 
-from dotenv import load_dotenv
-load_dotenv()
+from .stats import StatsResource
 
-EGG_INC_ID = os.getenv("EGG_INC_ID", "")
-#EGG_INC_ID = os.getenv("MY_EGG_INC_ID", "")
-#print(EGG_INC_ID)
+app = application = falcon.App()
 
-def load_ei_first_contact_data(egg_inc_id):
-  first_contact_req = ei_pb2.EggIncFirstContactRequest()
-  first_contact_req.ei_user_id = EGG_INC_ID
-  first_contact_req.client_version = 38
-
-  first_contact_url = 'https://www.auxbrain.com/ei/bot_first_contact'
-  first_contact_data = { 'data' : base64.b64encode(first_contact_req.SerializeToString()).decode('utf-8') }
-  response = requests.post(first_contact_url, data = first_contact_data)
-
-  first_contact_response = ei_pb2.EggIncFirstContactResponse()
-  first_contact_response.ParseFromString(base64.b64decode(response.text))
-  
-  return first_contact_response
-
-first_contact_response = load_ei_first_contact_data(EGG_INC_ID)
-
-print(first_contact_response.backup.stats.egg_totals[EGG_TOTALS_IDS["edible"]])
+stats = StatsResource()
+app.add_route('/stats', stats)

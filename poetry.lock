@@ -269,6 +269,39 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "sentry-sdk"
+version = "1.8.0"
+description = "Python client for Sentry (https://sentry.io)"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+certifi = "*"
+falcon = {version = ">=1.4", optional = true, markers = "extra == \"falcon\""}
+urllib3 = ">=1.10.0"
+
+[package.extras]
+aiohttp = ["aiohttp (>=3.5)"]
+beam = ["apache-beam (>=2.12)"]
+bottle = ["bottle (>=0.12.13)"]
+celery = ["celery (>=3)"]
+chalice = ["chalice (>=1.16.0)"]
+django = ["django (>=1.8)"]
+falcon = ["falcon (>=1.4)"]
+fastapi = ["fastapi (>=0.79.0)"]
+flask = ["flask (>=0.11)", "blinker (>=1.1)"]
+httpx = ["httpx (>=0.16.0)"]
+pure_eval = ["pure-eval", "executing", "asttokens"]
+pyspark = ["pyspark (>=2.4.4)"]
+quart = ["quart (>=0.16.1)", "blinker (>=1.1)"]
+rq = ["rq (>=0.6)"]
+sanic = ["sanic (>=0.8)"]
+sqlalchemy = ["sqlalchemy (>=1.2)"]
+starlette = ["starlette (>=0.19.1)"]
+tornado = ["tornado (>=5)"]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -327,7 +360,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f965cab455538543a4207e0e2cc161ce6daba2e521e61fdff8f7422bffacd616"
+content-hash = "64606bb7ab811b197a6c5e9aa22a5b6431d4249fe9d27500424874b1927bf261"
 
 [metadata.files]
 appnope = []
@@ -354,6 +387,7 @@ pure-eval = []
 pygments = []
 python-dotenv = []
 requests = []
+sentry-sdk = []
 six = []
 stack-data = []
 traitlets = []
