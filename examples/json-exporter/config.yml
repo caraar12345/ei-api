@@ -25,3 +25,7 @@ modules:
       - name: egg_inc_prestiges
         path: '{ .num_prestiges }'
         help: Times prestiged
+
+      - name: egg_inc_boost_uses
+        path: '{ .boosts_used }'
+        help: Count of boosts used

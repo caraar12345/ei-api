@@ -8,6 +8,7 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 
 - Egg counts in Grafana using Prometheus + [json_exporter](https://github.com/prometheus-community/json_exporter)
 - Also drone takedown counts, boost use count, video doubler use count etc etc
+  - Example config in the `examples` folder
 - Contract / Co-Op data in JSON format
 - ???
 
