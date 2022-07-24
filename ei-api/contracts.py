@@ -1,3 +1,6 @@
+# TODO: Implement solo contracts 
+# https://github.com/fanaticscripter/EggContractor/blob/master/solo/contract.go
+
 import sentry_sdk
 from sentry_sdk.integrations.falcon import FalconIntegration
 
