@@ -13,22 +13,17 @@ sentry_sdk.init(
   traces_sample_rate=1.0,
 )
 
-import os
-import base64
-import requests
 import falcon
-import json
 
 import sys
 sys.path.append('ei-api/')
 
-import proto.gen.ei_pb2 as ei_pb2
-from constants import *
-from ei_utils import load_ei_first_contact_data
-
-from .stats import StatsResource
-
 app = application = falcon.App()
 
+from .stats import StatsResource
 stats = StatsResource()
 app.add_route('/stats', stats)
+
+from .contracts import ContractResource
+contracts = ContractResource()
+app.add_route('/contracts', contracts)

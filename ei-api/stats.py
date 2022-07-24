@@ -45,26 +45,6 @@ class StatsResource:
       doc = {
         'egg_inc_id': egg_inc_id,
         'total_eggs': [
-          # '01_edible': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["edible"]],
-          # '02_superfood': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["superfood"]],
-          # '03_medical': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["medical"]],
-          # '04_rocket_fuel': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["rocket_fuel"]],
-          # '05_super_material': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["super_material"]],
-          # '06_fusion': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["fusion"]],
-          # '07_quantum': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["quantum"]],
-          # '08_immortality': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["immortality"]],
-          # '09_tachyon': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["tachyon"]],
-          # '10_graviton': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["graviton"]],
-          # '11_dilithium': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["dilithium"]],
-          # '12_prodigy': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["prodigy"]],
-          # '13_terraform': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["terraform"]],
-          # '14_antimatter': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["antimatter"]],
-          # '15_dark_matter': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["dark_matter"]],
-          # '16_ai': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["ai"]],
-          # '17_nebula': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["nebula"]],
-          # '18_universe': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["universe"]],
-          # '19_enlightenment': first_contact_resp.backup.stats.egg_totals[EGG_TOTALS_IDS["enlightenment"]]
-
           {
             'egg_id': 1,
             'egg_type': 'edible',
