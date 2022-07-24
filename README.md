@@ -1,6 +1,6 @@
 # ei-api
 
-A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fanaticscraper/Egg**](https://github.com/fanaticscraper/Egg) and using them to create a RESTful API for statistics.
+A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fanaticscripter/Egg**](https://github.com/fanaticscripter/Egg) and using them to create a RESTful API for statistics.
 
 ---
 
