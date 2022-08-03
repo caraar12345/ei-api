@@ -27,3 +27,7 @@ app.add_route('/stats', stats)
 from .contracts import ContractResource
 contracts = ContractResource()
 app.add_route('/contracts', contracts)
+
+from .full_output import FullBackupResource
+full_backup = FullBackupResource()
+app.add_route('/full_backup', full_backup)
