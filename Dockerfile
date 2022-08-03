@@ -9,6 +9,7 @@ ENV PATH /opt/poetry/bin:$PATH
 WORKDIR /app
 COPY . /app/
 RUN poetry install --no-interaction --no-ansi
+COPY ./helpers/sentry_falcon.py /usr/local/lib/python3.9/site-packages/sentry_sdk/integrations/falcon.py
 
 EXPOSE 5648/tcp
 ENTRYPOINT ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5648", "ei-api.app"]
