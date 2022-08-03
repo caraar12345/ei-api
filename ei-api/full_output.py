@@ -23,6 +23,7 @@ sys.path.append('ei-api/')
 import proto.gen.ei_pb2 as ei_pb2
 from constants import *
 from ei_utils import load_ei_first_contact_data
+from google.protobuf.json_format import MessageToJson
 
 class FullBackupResource:
     def on_get(self, req, resp):
