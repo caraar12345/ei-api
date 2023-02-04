@@ -1,6 +1,6 @@
 FROM python:3.9-buster as builder
 
-ENV POETRY_VERSION=1.1.13 \
+ENV POETRY_VERSION=1.3.2 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_HOME=/opt/poetry
 RUN curl -sSL https://install.python-poetry.org | python
