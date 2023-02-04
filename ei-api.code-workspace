@@ -1,22 +1,15 @@
 {
-	"folders": [
-		{
-			"path": "/Users/aaroncarson/src/github.com/caraar12345/ei-api"
-		},
-		{
-			"path": "/Users/aaroncarson/src/github.com/caraar12345/EggContractor"
-		},
-		{
-			"path": "/Users/aaroncarson/src/github.com/derekantrican/EggIncAPI"
-		}
-	],
-	"settings": {
-		"protoc": {
-		"options": [
-			"--proto_path=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto",
-			"--python_out=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto/gen"
-		]
-		}
-
-	}
+    "folders": [
+        {"path": "/Users/aaroncarson/src/github.com/caraar12345/ei-api"},
+        {"path": "/Users/aaroncarson/src/github.com/caraar12345/EggContractor"},
+        {"path": "/Users/aaroncarson/src/github.com/derekantrican/EggIncAPI"},
+    ],
+    "settings": {
+        "protoc": {
+            "options": [
+                "--proto_path=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto",
+                "--python_out=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto/gen",
+            ]
+        }
+    },
 }
