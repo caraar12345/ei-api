@@ -11,7 +11,7 @@ from constants import *
 def load_ei_first_contact_data(egg_inc_id):
     first_contact_req = ei_pb2.EggIncFirstContactRequest()
     first_contact_req.ei_user_id = egg_inc_id
-    first_contact_req.client_version = 38
+    first_contact_req.client_version = 40
 
     first_contact_url = "https://www.auxbrain.com/ei/bot_first_contact"
     first_contact_data = {
