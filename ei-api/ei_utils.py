@@ -8,7 +8,7 @@ import proto.gen.ei_pb2 as ei_pb2
 from constants import *
 
 
-def load_ei_first_contact_data(egg_inc_id):
+def load_ei_first_contact_data(egg_inc_id) -> ei_pb2.EggIncFirstContactResponse:
     first_contact_req = ei_pb2.EggIncFirstContactRequest()
     first_contact_req.ei_user_id = egg_inc_id
     first_contact_req.client_version = 45

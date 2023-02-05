@@ -19,3 +19,30 @@ EGG_TOTALS_IDS = {
     "universe": 17,
     "enlightenment": 18,
 }
+
+MAP_EPIC_EI_TO_CALC = {
+    "hold_to_hatch": "holdToHatch",
+    "epic_hatchery": "epicHatchery",
+    "epic_internal_incubators": "epicIntHatchery",
+    "video_doubler_time": "videoDoubler",
+    "epic_clucking": "epicClucking",
+    "epic_multiplier": "epicMultiplier",
+    "cheaper_contractors": "cheaperContractors",
+    "bust_unions": "bustUnions",
+    "cheaper_research": "labUpgrade",
+    "epic_silo_quality": "siloQuality",  # no longer present
+    "silo_capacity": "siloCapacity",
+    "int_hatch_sharing": "internalHatcherySharing",
+    "int_hatch_calm": "internalHatcheryCalm",
+    "accounting_tricks": "accountingTricks",
+    "hold_to_research": "holdToResearch",
+    "soul_eggs": "soulFood",
+    "prestige_bonus": "prestigeBonus",
+    "drone_rewards": "droneRewards",
+    "epic_egg_laying": "epicComfyNests",
+    "transportation_lobbyist": "transportationLobbyists",
+    "warp_shift": "warpShift",  # no longer present
+    "prophecy_bonus": "prophecyBonus",
+    "afx_mission_time": "ftlDrive",
+    "afx_mission_capacity": "zeroG",
+}

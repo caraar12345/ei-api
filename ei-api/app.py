@@ -34,3 +34,8 @@ from .full_output import FullBackupResource
 
 full_backup = FullBackupResource()
 app.add_route("/full_backup", full_backup)
+
+from .epic_research import EpicResearchData
+
+epic_research = EpicResearchData()
+app.add_route("/epic_research", epic_research)
