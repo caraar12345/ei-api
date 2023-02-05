@@ -1,4 +1,5 @@
 import base64
+import math
 import requests
 import re
 import sys
@@ -42,3 +43,15 @@ def verify_egg_inc_id(x_egg_inc_id: str | None = Header(default=None)) -> bool:
         raise HTTPException(status_code=400, detail="X-Egg-Inc-ID header invalid")
 
     return True
+
+
+def get_soul_power_oom(soul_power):
+    return math.floor(max(soul_power, 0))
+
+
+def get_farmer_role(oom):
+    return (
+        MAP_OOM_FARMER_ROLE[str(oom)]
+        if oom < len(MAP_OOM_FARMER_ROLE)
+        else MAP_OOM_FARMER_ROLE[str(len(MAP_OOM_FARMER_ROLE) - 1)]
+    )

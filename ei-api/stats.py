@@ -50,133 +50,133 @@ class StatsResource:
                     "egg_id": 1,
                     "egg_type": "edible",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["edible"]
+                        MAP_EGG_NAME_ID["edible"]
                     ],
                 },
                 {
                     "egg_id": 2,
                     "egg_type": "superfood",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["superfood"]
+                        MAP_EGG_NAME_ID["superfood"]
                     ],
                 },
                 {
                     "egg_id": 3,
                     "egg_type": "medical",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["medical"]
+                        MAP_EGG_NAME_ID["medical"]
                     ],
                 },
                 {
                     "egg_id": 4,
                     "egg_type": "rocket_fuel",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["rocket_fuel"]
+                        MAP_EGG_NAME_ID["rocket_fuel"]
                     ],
                 },
                 {
                     "egg_id": 5,
                     "egg_type": "super_material",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["super_material"]
+                        MAP_EGG_NAME_ID["super_material"]
                     ],
                 },
                 {
                     "egg_id": 6,
                     "egg_type": "fusion",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["fusion"]
+                        MAP_EGG_NAME_ID["fusion"]
                     ],
                 },
                 {
                     "egg_id": 7,
                     "egg_type": "quantum",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["quantum"]
+                        MAP_EGG_NAME_ID["quantum"]
                     ],
                 },
                 {
                     "egg_id": 8,
                     "egg_type": "immortality",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["immortality"]
+                        MAP_EGG_NAME_ID["immortality"]
                     ],
                 },
                 {
                     "egg_id": 9,
                     "egg_type": "tachyon",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["tachyon"]
+                        MAP_EGG_NAME_ID["tachyon"]
                     ],
                 },
                 {
                     "egg_id": 10,
                     "egg_type": "graviton",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["graviton"]
+                        MAP_EGG_NAME_ID["graviton"]
                     ],
                 },
                 {
                     "egg_id": 11,
                     "egg_type": "dilithium",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["dilithium"]
+                        MAP_EGG_NAME_ID["dilithium"]
                     ],
                 },
                 {
                     "egg_id": 12,
                     "egg_type": "prodigy",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["prodigy"]
+                        MAP_EGG_NAME_ID["prodigy"]
                     ],
                 },
                 {
                     "egg_id": 13,
                     "egg_type": "terraform",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["terraform"]
+                        MAP_EGG_NAME_ID["terraform"]
                     ],
                 },
                 {
                     "egg_id": 14,
                     "egg_type": "antimatter",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["antimatter"]
+                        MAP_EGG_NAME_ID["antimatter"]
                     ],
                 },
                 {
                     "egg_id": 15,
                     "egg_type": "dark_matter",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["dark_matter"]
+                        MAP_EGG_NAME_ID["dark_matter"]
                     ],
                 },
                 {
                     "egg_id": 16,
                     "egg_type": "ai",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["ai"]
+                        MAP_EGG_NAME_ID["ai"]
                     ],
                 },
                 {
                     "egg_id": 17,
                     "egg_type": "nebula",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["nebula"]
+                        MAP_EGG_NAME_ID["nebula"]
                     ],
                 },
                 {
                     "egg_id": 18,
                     "egg_type": "universe",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["universe"]
+                        MAP_EGG_NAME_ID["universe"]
                     ],
                 },
                 {
                     "egg_id": 19,
                     "egg_type": "enlightenment",
                     "count": first_contact_resp.backup.stats.egg_totals[
-                        EGG_TOTALS_IDS["enlightenment"]
+                        MAP_EGG_NAME_ID["enlightenment"]
                     ],
                 },
             ],

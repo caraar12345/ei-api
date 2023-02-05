@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from . import epic_research, full_backup
+from . import epic_research, full_backup, contracts
 from tomli import load as toml_load
 
 import sentry_sdk
@@ -18,6 +18,7 @@ tags_metadata = [
         "description": "Egg, Inc. counts the game data on the Auxbrain servers as a backup. That naming is followed here.",
     },
     {"name": "Epic research"},
+    {"name": "Contracts"},
 ]
 
 app = FastAPI(
@@ -27,6 +28,7 @@ app = FastAPI(
 )
 app.include_router(epic_research.router)
 app.include_router(full_backup.router)
+app.include_router(contracts.router)
 
 
 @app.get("/", include_in_schema=False)

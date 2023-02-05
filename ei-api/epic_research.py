@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, Header
+from fastapi import APIRouter, Depends, HTTPException, Header
 from fastapi.responses import PlainTextResponse
 
 
