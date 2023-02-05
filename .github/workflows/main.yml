@@ -33,16 +33,20 @@ jobs:
           file: 'pyproject.toml'
           field: 'tool.poetry.version'
 
-      - name: Create tag
-        run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git tag -a -m "Autotag from GitHub Actions - ${{ github.sha }}" v${{ steps.read_version.outputs.value }} ${{ github.sha }}
-          git push
+#      - name: Create tag
+#        run: |
+#          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#          git config user.name "github-actions[bot]"
+#          git tag -a -m "Autotag from GitHub Actions - ${{ github.sha }}" v${{ steps.read_version.outputs.value }} ${{ github.sha }}
+#          git push
 
       - name: Create release
         run: |
-          gh release create "v${{ steps.read_version.outputs.value }}" --generate-notes --title "v${{ steps.read_version.outputs.value }}"
+          gh release create \
+            "v${{ steps.read_version.outputs.value }}" \
+            --generate-notes \
+            --title "v${{ steps.read_version.outputs.value }}" \
+            --target ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
