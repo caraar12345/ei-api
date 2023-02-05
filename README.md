@@ -59,9 +59,11 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 
 ---
 
-## ✏️ Config
-- Only one thing can be configured - the path base / root path.
-  - If you're using a reverse proxy, this means you can have multiple endpoints on one domain by changing the base of the path to something else.
-  - The [FastAPI docs](https://fastapi.tiangolo.com/advanced/behind-a-proxy/) do a better job of explaining than I ever could!
-- **Environment variable**: `EI_ROOT_PATH`
-  - Defaults to `/`
+## ✏️ Config (_environment variables_)
+
+### `EI_ROOT_PATH`
+- Defaults to `/`
+- If you're using a reverse proxy, this means you can have multiple endpoints on one domain by changing the base of the path to something else.
+- The [FastAPI docs](https://fastapi.tiangolo.com/advanced/behind-a-proxy/) do a better job of explaining than I ever could!
+- **You must strip this prefix on the reverse proxy side.** 
+  - Here's an example of a [Caddyfile](examples/Caddyfile).

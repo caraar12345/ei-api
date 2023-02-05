@@ -1,0 +1,5 @@
+api.domain.tld
+
+handle_path /egg_inc/* {
+    reverse_proxy http://ei-api:5648
+}

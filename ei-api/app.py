@@ -12,7 +12,7 @@ if os.getenv("EI_DISABLE_SENTRY", default="false").lower() != "true":
     )
 else:
     print("Sentry disabled.")
-    
+
 with open("pyproject.toml", "rb") as pyproject_file:
     pyproject = toml_load(pyproject_file)
 
@@ -38,6 +38,6 @@ app.include_router(contracts.router)
 app.include_router(stats.router)
 
 
-@app.get("/", include_in_schema=False)
+@app.get("/", include_in_schema=False, status_code=418)
 async def root():
-    raise HTTPException(status_code=418)
+    return {"detail": "🥚 I'm an egg cup 🐔"}
