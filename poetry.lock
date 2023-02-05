@@ -341,6 +341,22 @@ files = [
 traitlets = "*"
 
 [[package]]
+name = "mypy-protobuf"
+version = "3.4.0"
+description = "Generate mypy stub files from protobuf specs"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "mypy-protobuf-3.4.0.tar.gz", hash = "sha256:7d75a079651b105076776a35a5405e3fa773b8a167118f1b712e443e9a6c18a2"},
+    {file = "mypy_protobuf-3.4.0-py3-none-any.whl", hash = "sha256:da33dfde7547ff57e5ba5564126cbfa114f14413b2fa50759b1fa5de1e4ab511"},
+]
+
+[package.dependencies]
+protobuf = ">=4.21.8"
+types-protobuf = ">=3.20.4"
+
+[[package]]
 name = "parso"
 version = "0.8.3"
 description = "A Python Parser"
@@ -607,6 +623,18 @@ docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 test = ["argcomplete (>=2.0)", "pre-commit", "pytest", "pytest-mock"]
 
 [[package]]
+name = "types-protobuf"
+version = "4.21.0.4"
+description = "Typing stubs for protobuf"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-protobuf-4.21.0.4.tar.gz", hash = "sha256:09d39f2c84d0c9c323f44a4c6f1f88fbb1aac0c855f89a3c2746b50c823360cc"},
+    {file = "types_protobuf-4.21.0.4-py3-none-any.whl", hash = "sha256:7e1f8641b013f1500ee3b56ab4596df26b325d61bc0c69c6eb58ec65f4e41ad8"},
+]
+
+[[package]]
 name = "urllib3"
 version = "1.26.14"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
@@ -638,4 +666,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "270d0ed61e4659aba5d999990c1001fefbf2200f1371213783d9d57ab10e8b8d"
+content-hash = "6dc75c2b75b403ee5654318dcf4d7fd4101ec2527ecdd3293de0d5acf357bc3d"
