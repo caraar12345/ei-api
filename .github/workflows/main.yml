@@ -75,7 +75,7 @@ jobs:
           gh release create \
             "v${{ steps.package_version.outputs.value }}" \
             --generate-notes \
-            --title "{{ steps.package_version.outputs.name }} - v${{ steps.package_version.outputs.value }}" \
+            --title "{{ steps.package_name.outputs.value }} - v${{ steps.package_version.outputs.value }}" \
             --target ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

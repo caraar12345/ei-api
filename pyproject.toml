@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ei-api-fastapi"
+name = "ei-api"
 version = "1.0.0"
 description = "Egg, Inc. API"
 authors = ["Aaron Carson <aaron@aaroncarson.co.uk>"]
