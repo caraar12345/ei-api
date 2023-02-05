@@ -12,4 +12,4 @@ COPY . /app/
 RUN poetry install --no-interaction --no-ansi --without dev
 
 EXPOSE 5648/tcp
-ENTRYPOINT ["poetry", "run", "gunicorn", "--bind", "0.0.0.0:5648", "ei-api.app"]
+ENTRYPOINT ["poetry", "run", "uvicorn", "--host", "0.0.0.0", "--port", "5648", "ei-api.app:app"]
