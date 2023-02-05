@@ -1,0 +1,6 @@
+version: 3
+services:
+  ei-api:
+    image: aaroncarson/ei-api:latest
+    ports:
+      - 5648:5648
