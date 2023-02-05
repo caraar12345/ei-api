@@ -1,196 +1,59 @@
+from fastapi import APIRouter, Depends, HTTPException, Header
+
 import sentry_sdk
-from sentry_sdk.integrations.falcon import FalconIntegration
 
 sentry_sdk.init(
-    dsn="https://d42921cbb87b4c26b1a91dc566d811f2@o915576.ingest.sentry.io/6596181",
-    integrations=[
-        FalconIntegration(),
-    ],
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production,
+    dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
     traces_sample_rate=0.1,
 )
 
-import falcon
-import json
-import re
+from .proto.gen import ei_pb2
+from .constants import *
+from .ei_utils import *
 
-import sys
+router = APIRouter(
+    prefix="/stats",
+    dependencies=[Depends(verify_egg_inc_id)],
+    responses={404: {"description": "Not found"}},
+    tags=["Statistics"],
+)
 
-sys.path.append("ei-api/")
 
-import proto.gen.ei_pb2 as ei_pb2
-from constants import *
-from ei_utils import load_ei_first_contact_data
+@router.get(
+    "/",
+    name="GameStatistics",
+    summary="Current stats surrounding the user's progress in Egg, Inc.",
+)
+def get_game_data(x_egg_inc_id: str | None = Header(default=None)):
+    first_contact_resp, ok = load_ei_first_contact_data(x_egg_inc_id)
+    if ok != True:
+        raise HTTPException(400, detail=first_contact_resp.error_message)
 
+    egg_totals = first_contact_resp.backup.stats.egg_totals
+    egg_counts = []
+    for egg_id in range(1, len(egg_totals) + 1):
+        egg_counts.append(
+            {
+                "egg_id": egg_id,
+                "egg_type": ei_pb2.Egg.Name(egg_id).lower(),  # type: ignore -- it works fine, shush pyright
+                "count": egg_totals[egg_id - 1],
+            }
+        )
 
-class StatsResource:
-    def on_get(self, req, resp):
-        # Check egg_inc_id is in the query string
-        try:
-            egg_inc_id = req.params["egg_inc_id"]
-        except KeyError:
-            resp.status = falcon.HTTP_400
-            resp.text = json.dumps({"error": "No egg_inc_id provided"})
-            return
-
-        # Check that the egg_inc_id fits the expected format
-        ei_id_pattern = re.compile("^EI[0-9]{16}$")
-        if not ei_id_pattern.match(egg_inc_id):
-            resp.status = falcon.HTTP_400
-            resp.text = json.dumps({"error": "Invalid egg_inc_id"})
-            return
-
-        first_contact_resp = load_ei_first_contact_data(egg_inc_id)
-        doc = {
-            "egg_inc_id": egg_inc_id,
-            "total_eggs": [
-                {
-                    "egg_id": 1,
-                    "egg_type": "edible",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["edible"]
-                    ],
-                },
-                {
-                    "egg_id": 2,
-                    "egg_type": "superfood",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["superfood"]
-                    ],
-                },
-                {
-                    "egg_id": 3,
-                    "egg_type": "medical",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["medical"]
-                    ],
-                },
-                {
-                    "egg_id": 4,
-                    "egg_type": "rocket_fuel",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["rocket_fuel"]
-                    ],
-                },
-                {
-                    "egg_id": 5,
-                    "egg_type": "super_material",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["super_material"]
-                    ],
-                },
-                {
-                    "egg_id": 6,
-                    "egg_type": "fusion",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["fusion"]
-                    ],
-                },
-                {
-                    "egg_id": 7,
-                    "egg_type": "quantum",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["quantum"]
-                    ],
-                },
-                {
-                    "egg_id": 8,
-                    "egg_type": "immortality",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["immortality"]
-                    ],
-                },
-                {
-                    "egg_id": 9,
-                    "egg_type": "tachyon",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["tachyon"]
-                    ],
-                },
-                {
-                    "egg_id": 10,
-                    "egg_type": "graviton",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["graviton"]
-                    ],
-                },
-                {
-                    "egg_id": 11,
-                    "egg_type": "dilithium",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["dilithium"]
-                    ],
-                },
-                {
-                    "egg_id": 12,
-                    "egg_type": "prodigy",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["prodigy"]
-                    ],
-                },
-                {
-                    "egg_id": 13,
-                    "egg_type": "terraform",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["terraform"]
-                    ],
-                },
-                {
-                    "egg_id": 14,
-                    "egg_type": "antimatter",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["antimatter"]
-                    ],
-                },
-                {
-                    "egg_id": 15,
-                    "egg_type": "dark_matter",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["dark_matter"]
-                    ],
-                },
-                {
-                    "egg_id": 16,
-                    "egg_type": "ai",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["ai"]
-                    ],
-                },
-                {
-                    "egg_id": 17,
-                    "egg_type": "nebula",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["nebula"]
-                    ],
-                },
-                {
-                    "egg_id": 18,
-                    "egg_type": "universe",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["universe"]
-                    ],
-                },
-                {
-                    "egg_id": 19,
-                    "egg_type": "enlightenment",
-                    "count": first_contact_resp.backup.stats.egg_totals[
-                        MAP_EGG_NAME_ID["enlightenment"]
-                    ],
-                },
-            ],
-            "boosts_used": first_contact_resp.backup.stats.boosts_used,
-            "video_doubler_uses": first_contact_resp.backup.stats.video_doubler_uses,
-            "drone_takedowns": first_contact_resp.backup.stats.drone_takedowns,
-            "drone_takedowns_elite": first_contact_resp.backup.stats.drone_takedowns_elite,
-            "num_prestiges": first_contact_resp.backup.stats.num_prestiges,
-            "num_piggy_breaks": first_contact_resp.backup.stats.num_piggy_breaks,
-            "iap_packs_purchased": first_contact_resp.backup.stats.iap_packs_purchased,
-            "piggy_full": first_contact_resp.backup.stats.piggy_full,
-            "piggy_found_full": first_contact_resp.backup.stats.piggy_found_full,
-            "time_piggy_filled_realtime": first_contact_resp.backup.stats.time_piggy_filled_realtime,
-            "time_piggy_full_gametime": first_contact_resp.backup.stats.time_piggy_full_gametime,
-            "lost_piggy_increments": first_contact_resp.backup.stats.lost_piggy_increments,
-        }
-        resp.text = json.dumps(doc)
+    out_doc = {
+        "egg_inc_id": x_egg_inc_id,
+        "total_eggs": egg_counts,
+        "boosts_used": first_contact_resp.backup.stats.boosts_used,
+        "video_doubler_uses": first_contact_resp.backup.stats.video_doubler_uses,
+        "drone_takedowns": first_contact_resp.backup.stats.drone_takedowns,
+        "drone_takedowns_elite": first_contact_resp.backup.stats.drone_takedowns_elite,
+        "num_prestiges": first_contact_resp.backup.stats.num_prestiges,
+        "num_piggy_breaks": first_contact_resp.backup.stats.num_piggy_breaks,
+        "iap_packs_purchased": first_contact_resp.backup.stats.iap_packs_purchased,
+        "piggy_full": first_contact_resp.backup.stats.piggy_full,
+        "piggy_found_full": first_contact_resp.backup.stats.piggy_found_full,
+        "time_piggy_filled_realtime": first_contact_resp.backup.stats.time_piggy_filled_realtime,
+        "time_piggy_full_gametime": first_contact_resp.backup.stats.time_piggy_full_gametime,
+        "lost_piggy_increments": first_contact_resp.backup.stats.lost_piggy_increments,
+    }
+    return out_doc
