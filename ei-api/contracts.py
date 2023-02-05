@@ -54,8 +54,9 @@ class ContractResource:
             except KeyError:
                 coop_id = None
 
+            coop_contributors = []
+
             if coop_id != None:
-                coop_contributors = []
                 for coop in first_contact_resp.backup.contracts.current_coop_statuses:
                     if coop_id == coop.coop_identifier:
                         for contributor in coop.contributors:
