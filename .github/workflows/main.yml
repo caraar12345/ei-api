@@ -50,7 +50,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            aaroncarson/${{ steps.package_version.outputs.name }}
+            aaroncarson/${{ steps.package_name.outputs.value }}
           flavor: |
             latest=true
           # generate Docker tags based on the following events/attributes
@@ -75,7 +75,7 @@ jobs:
           gh release create \
             "v${{ steps.package_version.outputs.value }}" \
             --generate-notes \
-            --title "{{ steps.package_version.outputs.name }} - v${{ steps.package_version.outputs.value }}" \
+            --title "{{ steps.package_name.outputs.value }} - v${{ steps.package_version.outputs.value }}" \
             --target ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

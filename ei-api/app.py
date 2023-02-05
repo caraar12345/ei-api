@@ -1,41 +1,59 @@
+from fastapi import FastAPI, HTTPException
+from . import epic_research, full_backup, contracts, stats
+from tomli import load as toml_load
+
 import sentry_sdk
-from sentry_sdk.integrations.falcon import FalconIntegration
 
 sentry_sdk.init(
-    dsn="https://d42921cbb87b4c26b1a91dc566d811f2@o915576.ingest.sentry.io/6596181",
-    integrations=[
-        FalconIntegration(),
-    ],
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production,
+    dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
     traces_sample_rate=0.1,
 )
 
-import falcon
+with open("pyproject.toml", "rb") as pyproject_file:
+    pyproject = toml_load(pyproject_file)
 
-import sys
+tags_metadata = [
+    {
+        "name": "Full backup",
+        "description": "Egg, Inc. counts the game data on the Auxbrain servers as a backup. That naming is followed here.",
+    },
+    {"name": "Epic research"},
+    {"name": "Contracts"},
+    {"name": "Stats"},
+]
 
-sys.path.append("ei-api/")
+app = FastAPI(
+    title=pyproject["tool"]["poetry"]["name"],
+    version=pyproject["tool"]["poetry"]["version"],
+    openapi_tags=tags_metadata,
+)
+app.include_router(epic_research.router)
+app.include_router(full_backup.router)
+app.include_router(contracts.router)
+app.include_router(stats.router)
 
-app = application = falcon.App()
 
-from .stats import StatsResource
+@app.get("/", include_in_schema=False)
+async def root():
+    raise HTTPException(status_code=418)
 
-stats = StatsResource()
-app.add_route("/stats", stats)
 
-from .contracts import ContractResource
+# from .stats import StatsResource
 
-contracts = ContractResource()
-app.add_route("/contracts", contracts)
+# stats = StatsResource()
+# app.add_route("/stats", stats)
 
-from .full_output import FullBackupResource
+# from .contracts import ContractResource
 
-full_backup = FullBackupResource()
-app.add_route("/full_backup", full_backup)
+# contracts = ContractResource()
+# app.add_route("/contracts", contracts)
 
-from .epic_research import EpicResearchData
+# from .full_output import FullBackupResource
 
-epic_research = EpicResearchData()
-app.add_route("/epic_research", epic_research)
+# full_backup = FullBackupResource()
+# app.add_route("/full_backup", full_backup)
+
+# from .epic_research import EpicResearchData
+
+# epic_research = EpicResearchData()
+# app.add_route("/epic_research", epic_research)
