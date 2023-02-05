@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from . import epic_research, full_backup, contracts, stats
 from tomli import load as toml_load
 import os
@@ -32,6 +33,15 @@ app = FastAPI(
     openapi_tags=tags_metadata,
     root_path=os.getenv("EI_ROOT_PATH", "/"),
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["X-Egg-Inc-ID"],
+)
+
 app.include_router(epic_research.router)
 app.include_router(full_backup.router)
 app.include_router(contracts.router)
