@@ -28,6 +28,7 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 
 
 ### Docker (_recommended_)
+
 - `ei-api` is available on Docker Hub ✨
 - `docker run -d -p '5648:5648' aaroncarson/ei-api`
 - There's an example [`docker-compose.yml`](examples/docker-compose.yml) file
@@ -35,6 +36,7 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 
 
 ### Install directly
+
 - `ei-api` uses Poetry as its package manager
   - Install Poetry on your machine
     - `pip install poetry==1.3.2` _should_ work nicely
