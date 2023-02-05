@@ -10,7 +10,7 @@ sentry_sdk.init(
 )
 
 import json
-from base64 import b64encode, b64decode
+from base64 import b64encode
 
 from .proto.gen import ei_pb2
 from .constants import *
@@ -42,12 +42,11 @@ def get_epic_research(x_egg_inc_id: str | None = Header(default=None)):
 
 
 @router.get(
-    "/calculator/",
-    name="GoldenEggsCalculatorGenerator",
-    summary="Generates Base64 data for the Egg, Inc. Golden Eggs Costs Calculator from user ID",
-    response_class=PlainTextResponse,
+    "/calculator/json",
+    name="GoldenEggsCalculatorGeneratorJSON",
+    summary="Generates JSON blob for the Egg, Inc. Golden Eggs Costs Calculator from user ID",
 )
-def epic_calculator_gen(x_egg_inc_id: str | None = Header(default=None)):
+def epic_calculator_gen_json(x_egg_inc_id: str | None = Header(default=None)):
     first_contact_resp, ok = load_ei_first_contact_data(x_egg_inc_id)
     if ok != True:
         raise HTTPException(400, detail=first_contact_resp.error_message)
@@ -81,13 +80,14 @@ def epic_calculator_gen(x_egg_inc_id: str | None = Header(default=None)):
         out_doc["upgrades"][calc_id] = research_item.level
         out_doc["increase"][calc_id] = 0
 
-    return b64encode(json.dumps(out_doc).encode("ascii"))
+    return out_doc
 
 
 @router.get(
-    "/calculator/json",
-    name="GoldenEggsCalculatorGeneratorJSON",
-    summary="Generates JSON blob for the Egg, Inc. Golden Eggs Costs Calculator from user ID",
+    "/calculator",
+    name="GoldenEggsCalculatorGenerator",
+    summary="Generates Base64 data for the Egg, Inc. Golden Eggs Costs Calculator from user ID",
+    response_class=PlainTextResponse,
 )
-def epic_calculator_gen_json(x_egg_inc_id: str | None = Header(default=None)):
-    return json.loads(b64decode(epic_calculator_gen(x_egg_inc_id)))
+def epic_calculator_gen_b64(x_egg_inc_id: str | None = Header(default=None)):
+    return b64encode(json.dumps(epic_calculator_gen_json(x_egg_inc_id)).encode("ascii"))
