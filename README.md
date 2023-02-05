@@ -35,8 +35,7 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 - No config is required
 
 
-### Install directly
-
+### Install directly
 - `ei-api` uses Poetry as its package manager
   - Install Poetry on your machine
     - `pip install poetry==1.3.2` _should_ work nicely
