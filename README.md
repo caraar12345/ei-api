@@ -1,6 +1,6 @@
 # ei-api
 
-[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aaroncarson/ei-api?style=for-the-badge)](https://hub.docker.com/aaroncarson/ei-api)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aaroncarson/ei-api?style=for-the-badge)](https://hub.docker.com/r/aaroncarson/ei-api)
 
 A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fanaticscripter/Egg**](https://github.com/fanaticscripter/Egg) and using them to create a RESTful API for statistics.
 
