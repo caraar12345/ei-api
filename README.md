@@ -10,12 +10,21 @@ A Python project taking the _Egg, Inc._ API protobufs kindly published in [**fan
 
 ---
 
+> **Warning**
+> This tool uses Sentry.io for error and performance tracking. 
+> Your Egg, Inc. ID will be sent to the Sentry servers -- but it will be redacted on the server side **so I will not be able to see it**.
+> _To disable Sentry entirely, set the environment variable `EI_DISABLE_SENTRY` to `true`._
+
+---
+
 ## 💼 Use cases
 
 - Egg counts in Grafana using Prometheus + [json_exporter](https://github.com/prometheus-community/json_exporter)
 - Also drone takedown counts, boost use count, video doubler use count etc etc
   - Example config in the `examples` folder
 - Contract / Coop data in JSON format
+- Generate import data for the [Egg, Inc. Golden Eggs Costs Calculator](https://royalphysique.net/eggs/)
+  - Huge thanks to https://github.com/SticklyMan for such a useful tool!
 - ???
 
 ---

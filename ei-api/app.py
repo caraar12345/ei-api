@@ -1,14 +1,18 @@
 from fastapi import FastAPI, HTTPException
 from . import epic_research, full_backup, contracts, stats
 from tomli import load as toml_load
+import os
 
-import sentry_sdk
+if os.getenv("EI_DISABLE_SENTRY", default="false").lower() != "true":
+    import sentry_sdk
 
-sentry_sdk.init(
-    dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
-    traces_sample_rate=0.1,
-)
-
+    sentry_sdk.init(
+        dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
+        traces_sample_rate=0.1,
+    )
+else:
+    print("Sentry disabled.")
+    
 with open("pyproject.toml", "rb") as pyproject_file:
     pyproject = toml_load(pyproject_file)
 

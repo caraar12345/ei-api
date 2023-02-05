@@ -1,13 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException, Header
 from fastapi.responses import PlainTextResponse
+import os
 
+if os.getenv("EI_DISABLE_SENTRY", default="false").lower() != "true":
+    import sentry_sdk
 
-import sentry_sdk
-
-sentry_sdk.init(
-    dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
-    traces_sample_rate=0.1,
-)
+    sentry_sdk.init(
+        dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
+        traces_sample_rate=0.1,
+    )
+else:
+    print("Sentry disabled.")
 
 import json
 from base64 import b64encode

@@ -2,13 +2,17 @@
 # https://github.com/fanaticscripter/EggContractor/blob/master/solo/contract.go
 
 from fastapi import APIRouter, Depends, HTTPException, Header
+import os
 
-import sentry_sdk
+if os.getenv("EI_DISABLE_SENTRY", default="false").lower() != "true":
+    import sentry_sdk
 
-sentry_sdk.init(
-    dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
-    traces_sample_rate=0.1,
-)
+    sentry_sdk.init(
+        dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
+        traces_sample_rate=0.1,
+    )
+else:
+    print("Sentry disabled.")
 
 from .proto.gen import ei_pb2
 from .constants import *

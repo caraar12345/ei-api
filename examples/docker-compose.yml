@@ -5,4 +5,5 @@ services:
     ports:
       - 5648:5648
     #environment:
-    # - EI_ROOT_PATH="/egg_inc/"
+    # - EI_ROOT_PATH="/"
+    # - EI_DISABLE_SENTRY="false"
