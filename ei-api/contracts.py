@@ -1,24 +1,17 @@
 # TODO: Implement solo contracts
 # https://github.com/fanaticscripter/EggContractor/blob/master/solo/contract.go
 
+from fastapi import APIRouter
+
 import sentry_sdk
-from sentry_sdk.integrations.falcon import FalconIntegration
 
 sentry_sdk.init(
-    dsn="https://d42921cbb87b4c26b1a91dc566d811f2@o915576.ingest.sentry.io/6596181",
-    integrations=[
-        FalconIntegration(),
-    ],
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production,
+    dsn="https://d1c1fed592bc4d1ca6e6daae67ff5640@o915576.ingest.sentry.io/4504628047183872",
     traces_sample_rate=0.1,
 )
 
-import falcon
 import json
 import re
-
 import sys
 
 sys.path.append("ei-api/")

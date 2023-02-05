@@ -1,5 +1,6 @@
 import base64
 import requests
+import re
 import sys
 
 sys.path.append("ei-api/")
@@ -7,8 +8,12 @@ sys.path.append("ei-api/")
 import proto.gen.ei_pb2 as ei_pb2
 from constants import *
 
+from fastapi import HTTPException, Header
 
-def load_ei_first_contact_data(egg_inc_id) -> ei_pb2.EggIncFirstContactResponse:
+
+def load_ei_first_contact_data(
+    egg_inc_id,
+) -> tuple[ei_pb2.EggIncFirstContactResponse, bool]:
     first_contact_req = ei_pb2.EggIncFirstContactRequest()
     first_contact_req.ei_user_id = egg_inc_id
     first_contact_req.client_version = 45
@@ -21,5 +26,19 @@ def load_ei_first_contact_data(egg_inc_id) -> ei_pb2.EggIncFirstContactResponse:
 
     first_contact_response = ei_pb2.EggIncFirstContactResponse()
     first_contact_response.ParseFromString(base64.b64decode(response.text))
+    if first_contact_response.error_message:
+        return first_contact_response, False
+    return first_contact_response, True
 
-    return first_contact_response
+
+def verify_egg_inc_id(x_egg_inc_id: str | None = Header(default=None)) -> bool:
+    # Check egg_inc_id is in the query string
+    if x_egg_inc_id == None:
+        raise HTTPException(status_code=400, detail="X-Egg-Inc-ID header missing")
+
+    # Check that the egg_inc_id fits the expected format
+    ei_id_pattern = re.compile("^EI[0-9]{16}$")
+    if not ei_id_pattern.match(x_egg_inc_id):
+        raise HTTPException(status_code=400, detail="X-Egg-Inc-ID header invalid")
+
+    return True
