@@ -4,3 +4,5 @@ services:
     image: aaroncarson/ei-api:latest
     ports:
       - 5648:5648
+    #environment:
+    # - EI_ROOT_PATH="/egg_inc/"

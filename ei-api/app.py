@@ -26,6 +26,7 @@ app = FastAPI(
     title=pyproject["tool"]["poetry"]["name"],
     version=pyproject["tool"]["poetry"]["version"],
     openapi_tags=tags_metadata,
+    root_path=os.getenv("EI_ROOT_PATH", "/"),
 )
 app.include_router(epic_research.router)
 app.include_router(full_backup.router)
@@ -36,24 +37,3 @@ app.include_router(stats.router)
 @app.get("/", include_in_schema=False)
 async def root():
     raise HTTPException(status_code=418)
-
-
-# from .stats import StatsResource
-
-# stats = StatsResource()
-# app.add_route("/stats", stats)
-
-# from .contracts import ContractResource
-
-# contracts = ContractResource()
-# app.add_route("/contracts", contracts)
-
-# from .full_output import FullBackupResource
-
-# full_backup = FullBackupResource()
-# app.add_route("/full_backup", full_backup)
-
-# from .epic_research import EpicResearchData
-
-# epic_research = EpicResearchData()
-# app.add_route("/epic_research", epic_research)
