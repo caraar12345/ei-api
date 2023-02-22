@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ei-api"
-version = "1.0.4"
+version = "1.0.5"
 description = "Egg, Inc. API"
 authors = ["Aaron Carson <aaron@aaroncarson.co.uk>"]
 license = "MIT"

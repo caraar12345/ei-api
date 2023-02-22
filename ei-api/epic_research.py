@@ -61,27 +61,15 @@ def epic_calculator_gen_json(x_egg_inc_id: str | None = Header(default=None)):
         # fmt: on
         "piggyLevel": game_backup.stats.num_piggy_breaks + 1,
         "piggyBank": game_backup.game.piggy_bank,
-        "piggyDiscount": 0,
-        "epicCalcOnlyDesired": False,
-        "epicCalcIncludePiggy": False,
-        "epicCalcTruckType": 0,
-        "epicDiscount": 0,
-        "hideCompleted": False,
-        "columns": {
-            "desc": True,
-            "bonus": True,
-            "spent": True,
-            "remaining": True,
-            "total": True,
+        "upgrades": {
+            "hyperloopStation": 1 if game_backup.game.hyperloop_station else 0,
+            "fuelTank": game_backup.artifacts.tank_level,
         },
-        "upgrades": {},
-        "increase": {},
     }
 
     for research_item in game_backup.game.epic_research:
         calc_id = MAP_EPIC_EI_TO_CALC[research_item.id]
         out_doc["upgrades"][calc_id] = research_item.level
-        out_doc["increase"][calc_id] = 0
 
     return out_doc
 
