@@ -15,7 +15,7 @@ tomli = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.1"
-ipython = "^8.9.0"
+ipython = "^8.11.0"
 mypy-protobuf = "^3.4.0"
 
 [build-system]
