@@ -951,14 +951,14 @@ idna2008 = ["idna"]
 
 [[package]]
 name = "sentry-sdk"
-version = "1.14.0"
+version = "1.20.0"
 description = "Python client for Sentry (https://sentry.io)"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "sentry-sdk-1.14.0.tar.gz", hash = "sha256:273fe05adf052b40fd19f6d4b9a5556316807246bd817e5e3482930730726bb0"},
-    {file = "sentry_sdk-1.14.0-py2.py3-none-any.whl", hash = "sha256:72c00322217d813cf493fe76590b23a757e063ff62fec59299f4af7201dd4448"},
+    {file = "sentry-sdk-1.20.0.tar.gz", hash = "sha256:a3410381ae769a436c0852cce140a5e5e49f566a07fb7c2ab445af1302f6ad89"},
+    {file = "sentry_sdk-1.20.0-py2.py3-none-any.whl", hash = "sha256:0ad6bbbe78057b8031a07de7aca6d2a83234e51adc4d436eaf8d8c697184db71"},
 ]
 
 [package.dependencies]
@@ -968,6 +968,7 @@ urllib3 = {version = ">=1.26.11", markers = "python_version >= \"3.6\""}
 
 [package.extras]
 aiohttp = ["aiohttp (>=3.5)"]
+arq = ["arq (>=0.23)"]
 beam = ["apache-beam (>=2.12)"]
 bottle = ["bottle (>=0.12.13)"]
 celery = ["celery (>=3)"]
@@ -976,7 +977,9 @@ django = ["django (>=1.8)"]
 falcon = ["falcon (>=1.4)"]
 fastapi = ["fastapi (>=0.79.0)"]
 flask = ["blinker (>=1.1)", "flask (>=0.11)"]
+grpcio = ["grpcio (>=1.21.1)"]
 httpx = ["httpx (>=0.16.0)"]
+huey = ["huey (>=2)"]
 opentelemetry = ["opentelemetry-distro (>=0.35b0)"]
 pure-eval = ["asttokens", "executing", "pure-eval"]
 pymongo = ["pymongo (>=3.1)"]
@@ -1391,4 +1394,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "63bd003a12c8e9c7b410ba7885cda670fa62ac05da85a5e0760e95ce767dcb93"
+content-hash = "9c3a940d98d4fea6a5da8898dd1ca057754bcfc7d4912006514d93488ec7d432"
