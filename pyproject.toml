@@ -1,23 +1,32 @@
-[tool.poetry]
+[project]
 name = "ei-api"
 version = "1.0.5"
 description = "Egg, Inc. API"
-authors = ["Aaron Carson <aaron@aaroncarson.co.uk>"]
-license = "MIT"
+authors = [
+    { name = "Aaron Carson", email = "aaron@aaroncarson.co.uk" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28.1",
+    "protobuf>=4.22.4",
+    "sentry-sdk[fastapi]>=1.14.0",
+    "fastapi[all]>=0.89.1",
+    "tomli>=2.0.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.28.1"
-protobuf = "^4.22.4"
-sentry-sdk = {extras = ["fastapi"], version = "^1.14.0"}
-fastapi = {extras = ["all"], version = "^0.89.1"}
-tomli = "^2.0.1"
+# 1. New standard for dev dependencies
+[dependency-groups]
+dev = [
+    "python-dotenv>=0.21.1",
+    "ipython>=8.9.0",
+    "mypy-protobuf>=3.4.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-python-dotenv = "^0.21.1"
-ipython = "^8.9.0"
-mypy-protobuf = "^3.4.0"
+[tool.hatch.build.targets.wheel]
+# 2. Tell Hatch exactly which directory contains your code
+packages = ["ei-api"]
 
 [build-system]
-requires = ["poetry-core==1.3.2"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

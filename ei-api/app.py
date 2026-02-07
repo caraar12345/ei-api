@@ -28,8 +28,8 @@ tags_metadata = [
 ]
 
 app = FastAPI(
-    title=pyproject["tool"]["poetry"]["name"],
-    version=pyproject["tool"]["poetry"]["version"],
+    title=pyproject["project"]["name"],
+    version=pyproject["project"]["version"],
     openapi_tags=tags_metadata,
     root_path=os.getenv("EI_ROOT_PATH", "/"),
 )

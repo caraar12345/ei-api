@@ -11,6 +11,9 @@ from constants import *
 
 from fastapi import HTTPException, Header
 
+# Compile regex once at module level for performance
+EI_ID_PATTERN = re.compile(r"^EI[0-9]{16}$")
+
 
 def load_ei_first_contact_data(
     egg_inc_id,
@@ -34,12 +37,11 @@ def load_ei_first_contact_data(
 
 def verify_egg_inc_id(x_egg_inc_id: str | None = Header(default=None)) -> bool:
     # Check egg_inc_id is in the query string
-    if x_egg_inc_id == None:
+    if x_egg_inc_id is None:
         raise HTTPException(status_code=400, detail="X-Egg-Inc-ID header missing")
 
     # Check that the egg_inc_id fits the expected format
-    ei_id_pattern = re.compile("^EI[0-9]{16}$")
-    if not ei_id_pattern.match(x_egg_inc_id):
+    if not EI_ID_PATTERN.match(x_egg_inc_id):
         raise HTTPException(status_code=400, detail="X-Egg-Inc-ID header invalid")
 
     return True
@@ -50,8 +52,6 @@ def get_soul_power_oom(soul_power):
 
 
 def get_farmer_role(oom):
-    return (
-        MAP_OOM_FARMER_ROLE[str(oom)]
-        if oom < len(MAP_OOM_FARMER_ROLE)
-        else MAP_OOM_FARMER_ROLE[str(len(MAP_OOM_FARMER_ROLE) - 1)]
-    )
+    oom_str = str(oom)
+    map_len = len(MAP_OOM_FARMER_ROLE)
+    return MAP_OOM_FARMER_ROLE[oom_str] if oom < map_len else MAP_OOM_FARMER_ROLE[str(map_len - 1)]

@@ -1,15 +1,29 @@
 {
     "folders": [
-        {"path": "/Users/aaroncarson/src/github.com/caraar12345/ei-api"},
-        {"path": "/Users/aaroncarson/src/github.com/caraar12345/EggContractor"},
-        {"path": "/Users/aaroncarson/src/github.com/derekantrican/EggIncAPI"},
+        {
+            "path": "."
+        },
+        {
+            "path": "../EggContractor"
+        },
+        {
+            "path": "../../derekantrican/EggIncAPI"
+        },
+        {
+            "path": "../../carpetsage/egg"
+        }
     ],
     "settings": {
         "protoc": {
             "options": [
-                "--proto_path=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto",
-                "--python_out=/Users/aaroncarson/src/github.com/caraar12345/ei-api/proto/gen",
+                "--proto_path=./ei-api/proto",
+                "--python_out=./ei-api/proto/gen",
             ]
         }
+    },
+    "extensions": {
+        "recommendations": [
+            "zxh404.vscode-proto3"
+        ]
     },
 }
