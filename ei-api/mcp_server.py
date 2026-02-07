@@ -144,22 +144,6 @@ def _fetch_backup(ei_id: str) -> ei_pb2.Backup:
     return fc_resp.backup
 
 
-def _fetch_coop_status(contract_id: str, coop_id: str) -> ei_pb2.ContractCoopStatusResponse:
-    req = ei_pb2.ContractCoopStatusRequest()
-    req.contract_identifier = contract_id
-    req.coop_identifier = coop_id
-
-    resp = requests.post(
-        "https://www.auxbrain.com/ei/coop_status",
-        data={"data": base64.b64encode(req.SerializeToString()).decode("utf-8")},
-        timeout=15,
-    )
-    resp.raise_for_status()
-
-    coop_resp = ei_pb2.ContractCoopStatusResponse()
-    coop_resp.ParseFromString(base64.b64decode(resp.text))
-    return coop_resp
-
 
 # ── Helpers ────────────────────────────────────────────────────────────
 
@@ -419,19 +403,26 @@ def get_contracts(ei_id: str) -> dict:
 
 
 @mcp.tool()
-def get_coop_status(contract_id: str, coop_id: str) -> dict:
-    """Get detailed coop status for a specific contract and coop.
-    Does not require a player ID - only needs the contract identifier and coop code.
-    Shows contributors, eggs laid, time remaining, goals achieved, gifts, and chicken runs."""
-    coop = _fetch_coop_status(contract_id, coop_id)
+def get_coop_status(ei_id: str, contract_id: str) -> dict:
+    """Get detailed coop status for a specific contract the player is in.
+    Shows contributors, eggs laid, time remaining, goals achieved, gifts, and chicken runs.
+    The contract_id should match one of the player's active contracts (use get_contracts to find them)."""
+    backup = _fetch_backup(ei_id)
 
-    if coop.response_status and coop.response_status != 0:
-        status_names = {
-            1: "Missing user", 2: "Missing coop ID", 3: "Missing contract ID",
-            4: "Membership not found", 5: "Coop not found", 6: "Contract not found",
-            7: "Invalid membership",
+    # Find the matching coop status from the player's backup
+    coop = None
+    for status in backup.contracts.current_coop_statuses:
+        if status.contract_identifier == contract_id:
+            coop = status
+            break
+
+    if coop is None:
+        # Also check if the contract exists at all in their active contracts
+        active_ids = [lc.contract.identifier for lc in backup.contracts.contracts if lc.contract]
+        return {
+            "error": f"No coop found for contract '{contract_id}'. "
+                     f"Player's active contracts: {active_ids}",
         }
-        return {"error": status_names.get(coop.response_status, f"Error {coop.response_status}")}
 
     contributors = []
     for c in coop.contributors:
@@ -468,6 +459,7 @@ def get_coop_status(contract_id: str, coop_id: str) -> dict:
         })
 
     return {
+        "ei_id": ei_id,
         "contract_id": coop.contract_identifier,
         "coop_id": coop.coop_identifier,
         "grade": GRADE_NAMES.get(coop.grade, "Unset"),
